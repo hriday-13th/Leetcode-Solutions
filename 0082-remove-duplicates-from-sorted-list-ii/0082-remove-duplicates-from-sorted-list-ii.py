@@ -22,8 +22,6 @@ class Solution:
                 while curr.next and curr.next.val == curr.val:
                     curr = curr.next
                 prev.next = curr.next
-                # prev = prev.next
-                # curr = curr.next
                 curr = curr.next
             else:
                 prev = curr
