@@ -1,25 +1,25 @@
 # Definition for a binary tree node.
-# class TreeNode:
+# class TreeNode(object):
 #     def __init__(self, val=0, left=None, right=None):
 #         self.val = val
 #         self.left = left
 #         self.right = right
-class Solution:
-    def smallestFromLeaf(self, root: Optional[TreeNode]) -> str:
-        self.ans = None
+class Solution(object):
+    ans = None
+    def smallestFromLeaf(self, root):
         self.dfs(root, [])
         return self.ans
     
-    def dfs(self, root, path):
-        if not root:
-            return
-        path.append(chr(root.val + ord('a')))
+    def dfs(self, node, path):
+        if not node:
+            return 
+        path.append(chr(ord('a') + node.val))
         
-        if not root.left and not root.right:
-            rev_path = ''.join(path[::-1])
-            if self.ans is None or rev_path < self.ans:
-                self.ans = rev_path
+        if not node.left and not node.right:
+            rev = "".join(path[::-1])
+            if not self.ans or rev < self.ans:
+                self.ans = rev
                 
-        self.dfs(root.left, path)
-        self.dfs(root.right, path)
+        self.dfs(node.left, path)
+        self.dfs(node.right, path)
         path.pop()
