@@ -3,8 +3,9 @@ class Solution:
         ls1 = sorted(nums1)
         ls2 = sorted(nums2)
         
-        diff = 0
-        for a,b in zip(ls1, ls2):
-            diff = b-a
+        return ls2[0] - ls1[0]
+#         diff = 0
+#         for a,b in zip(ls1, ls2):
+#             diff = b-a
             
-        return diff
+#         return diff
