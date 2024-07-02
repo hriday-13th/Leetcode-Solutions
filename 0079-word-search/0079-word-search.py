@@ -1,26 +1,32 @@
-class Solution:
-    def exist(self, board: List[List[str]], word: str) -> bool:
+class Solution(object):
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
         rows = len(board)
         cols = len(board[0])
         
-        def backtrack(a, b, c):
-            if c == len(word):
+        def backtrack(ind, i, j):
+            if ind == len(word):
                 return True
-            
-            if a < 0 or a >= rows or b < 0 or b >= cols or board[a][b] != word[c]:
+            if i < 0 or i >= rows or j < 0 or j >= cols or board[i][j] != word[ind]:
                 return False
             
-            temp = board[a][b]
-            board[a][b] = ''
+            temp = board[i][j]
+            board[i][j] = ""
             
-            if backtrack(a+1, b, c+1) + backtrack(a-1, b, c+1) + backtrack(a, b+1, c+1) + backtrack(a, b-1, c+1):
-                return True
+            found = (backtrack(ind+1, i+1, j) or backtrack(ind+1, i-1, j) or backtrack(ind+1, i, j+1) or backtrack(ind+1, i, j-1))
             
-            board[a][b] = temp
-            return False
+            board[i][j] = temp
+            return found
+            
             
         for i in range(rows):
             for j in range(cols):
-                if backtrack(i, j, 0):
-                    return True
+                if board[i][j] == word[0]:
+                    if backtrack(0, i, j):
+                        return True
+                    
         return False
