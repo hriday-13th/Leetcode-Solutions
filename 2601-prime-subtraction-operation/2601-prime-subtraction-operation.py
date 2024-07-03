@@ -1,22 +1,25 @@
-class Solution:
-    def primeSubOperation(self, nums: List[int]) -> bool:
+class Solution(object):
+    def primeSubOperation(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
         prime = [True] * 1001
         prime[0] = prime[1] = False
         
         for x in range(2, 1001):
             if prime[x]:
-                for j in range(x*x, 1001, x):
-                    prime[j] = False
+                for i in range(x*x, 1001, x):
+                    prime[i] = False
                     
         prev = 0
         
-        for x in nums:
-            if prev >= x:
+        for i in nums:
+            if prev >= i:
                 return False
-            for p in range(x - 1, -1, -1):
-                if prime[p] and x - p > prev:
+            for j in range(i-1, -1, -1):
+                if prime[j] and i - j > prev:
                     break
-                    
-            prev = x - p
+            prev = i - j
             
         return True
