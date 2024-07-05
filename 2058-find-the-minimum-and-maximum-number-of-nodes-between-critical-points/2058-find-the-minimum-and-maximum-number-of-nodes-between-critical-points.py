@@ -27,7 +27,6 @@ class Solution:
         if len(crit) < 2:
             return [-1, -1]
         
-        crit.sort()
         t = float('inf')
         for i in range(1, len(crit)):
             t = min(t, crit[i] - crit[i-1])
