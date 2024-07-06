@@ -1,6 +1,6 @@
 class TrieNode:
     def __init__(self):
-        self.children = {}
+        self.children = dict()
         self.words = list()
         self.n = 0
         
@@ -10,33 +10,36 @@ class Trie:
         
     def insert(self, word):
         node = self.root
-        for char in word:
-            if char not in node.children:
-                node.children[char] = TrieNode()
-            node = node.children[char]
+        for c in word:
+            if c not in node.children:
+                node.children[c] = TrieNode()
+            node = node.children[c]
             if node.n < 3:
                 node.words.append(word)
                 node.n += 1
                 
-    def search(self, prefix):
+    def search(self, word):
         node = self.root
-        for c in prefix:
+        for c in word:
             if c not in node.children:
                 return ''
             node = node.children[c]
         return node.words
-        
-class Solution:
-    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+
+class Solution(object):
+    def suggestedProducts(self, products, searchWord):
+        """
+        :type products: List[str]
+        :type searchWord: str
+        :rtype: List[List[str]]
+        """
         products.sort()
         trie = Trie()
         for p in products:
             trie.insert(p)
-            
         res = []
         pre = ''
         for c in searchWord:
             pre += c
             res.append(trie.search(pre))
-            
         return res
