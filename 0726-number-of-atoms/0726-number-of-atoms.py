@@ -1,5 +1,9 @@
-class Solution:
-    def countOfAtoms(self, formula: str) -> str:
+class Solution(object):
+    def countOfAtoms(self, formula):
+        """
+        :type formula: str
+        :rtype: str
+        """
         stack = [{}]
         i = 0
         n = len(formula)
@@ -15,8 +19,8 @@ class Solution:
                 while i < n and formula[i].isdigit():
                     i += 1
                 mul = int(formula[start : i] or 1)
-                for element, atoms in top.items():
-                    stack[-1][element] = stack[-1].get(element, 0) + atoms * mul
+                for element, count in top.items():
+                    stack[-1][element] = stack[-1].get(element, 0) + count * mul
             else:
                 start = i
                 i += 1
@@ -26,15 +30,15 @@ class Solution:
                 start = i
                 while i < n and formula[i].isdigit():
                     i += 1
-                atoms = int(formula[start : i] or 1)
-                stack[-1][element] = stack[-1].get(element, 0) + atoms
+                count = int(formula[start : i] or 1)
+                stack[-1][element] = stack[-1].get(element, 0) + count
                 
-        elements = stack.pop()
-        sort_elements = sorted(elements.keys())
+        res = stack.pop()
+        sorted_res = sorted(res.keys())
         
         ans = ""
-        for i in sort_elements:
+        for i in sorted_res:
             ans += i
-            ans += str(elements[i]) if elements[i] > 1 else ''
+            ans += str(res[i]) if res[i] > 1 else ''
             
         return ans
