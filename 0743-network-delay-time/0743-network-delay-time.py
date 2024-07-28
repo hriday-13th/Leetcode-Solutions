@@ -1,26 +1,31 @@
-class Solution:
-    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
-        adj = defaultdict(list)
+class Solution(object):
+    def networkDelayTime(self, times, n, k):
+        """
+        :type times: List[List[int]]
+        :type n: int
+        :type k: int
+        :rtype: int
+        """
+        # Djikstra Algorithm approach
+        adj_list = defaultdict(list)
         
-        for src, dest, wgt in times:
-            if src != dest:
-                adj[src].append((dest, wgt))
+        for u, v, w in times:
+            if u != v:
+                adj_list[u].append((w, v))
                 
-        pq = [(0, k)]
-        dist = {}
+        visited = set()
+        heap = [(0, k)]
         
-        while pq:
-            time_taken, node = heapq.heappop(pq)
-            if node in dist:
-                continue
-            dist[node] = time_taken
+        while heap:
+            time_taken, node = heapq.heappop(heap)
+            visited.add(node)
             
-            for nbr, time in adj[node]:
-                if nbr not in dist:
-                    new_time = time_taken + time
-                    heapq.heappush(pq, (new_time, nbr))
+            if len(visited) == n:
+                return time_taken
+            
+            for time, nbr in adj_list[node]:
+                if nbr not in visited:
+                    new_time = time + time_taken
+                    heapq.heappush(heap, (new_time, nbr))
                     
-        if len(dist) != n:
-            return -1
-        
-        return max(dist.values())
+        return -1
