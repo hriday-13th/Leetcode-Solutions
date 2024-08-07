@@ -1,18 +1,24 @@
-class Solution:
-    def splitMessage(self, message: str, limit: int) -> List[str]:
-        messages, count = 1, 1
+class Solution(object):
+    def splitMessage(self, message, limit):
+        """
+        :type message: str
+        :type limit: int
+        :rtype: List[str]
+        """
+        no_messages, count = 1, 1
         
-        while messages * (3 + len(str(messages))) + count + len(message) > messages * limit:
-            if 3 + len(str(messages)) * 2 >= limit:
+        while no_messages * (3 + len(str(no_messages))) + count + len(message) > no_messages * limit:
+            if 3 + len(str(no_messages)) * 2 >= limit:
                 return []
-            messages += 1
-            count += len(str(messages))
+            no_messages += 1
+            count += len(str(no_messages))
             
         ans = []
         
-        for i in range(1, messages + 1):
-            lim = limit - 3 - len(str(messages)) - len(str(i))
+        for i in range(1, no_messages + 1):
+            lim = limit - 3 - len(str(i)) - len(str(no_messages))
             s, message = message[:lim], message[lim:]
-            ans.append(f"{s}<{i}/{messages}>")
+            temp = s + "<" + str(i) + "/" + str(no_messages) + ">"
+            ans.append(temp)
             
         return ans
