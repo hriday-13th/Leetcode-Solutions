@@ -1,23 +1,22 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         count = 0
-        self.seen = set()
-        
-        def dfs(i, j):
-            if i < 0 or j < 0 or i >= len(grid) or j >= len(grid[0]) or grid[i][j] == "0":
+        rows, cols = len(grid), len(grid[0])
+        visited = set()
+
+        def dfs(r, c):
+            if r < 0 or r >= rows or c < 0 or c >= cols or (r, c) in visited or grid[r][c] == "0":
                 return
-            if (i,j) in self.seen:
-                return
-            
-            self.seen.add((i,j))
-            dfs(i, j+1)
-            dfs(i, j-1)
-            dfs(i+1, j)
-            dfs(i-1, j)
-        
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if grid[i][j] == "1" and (i,j) not in self.seen:
+            visited.add((r, c))
+            dfs(r + 1, c)
+            dfs(r, c + 1)
+            dfs(r - 1, c)
+            dfs(r, c - 1)
+
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == "1" and (r, c) not in visited:
+                    dfs(r, c)
                     count += 1
-                    dfs(i,j)
+
         return count
