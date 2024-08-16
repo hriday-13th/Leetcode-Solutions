@@ -1,16 +1,15 @@
-class Solution:
-    def appealSum(self, s: str) -> int:
-        last_seen = {s[0] : 0}
-        res = 1
-        curr, prev = 0, 1
+class Solution(object):
+    def appealSum(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        res, curr = 0, 0
+        prev = defaultdict(lambda: -1)
         
-        for i in range(1, len(s)):
-            if s[i] in last_seen:
-                curr = prev + (i - last_seen[s[i]])
-            else:
-                curr = prev + (i + 1)
+        for i, ch in enumerate(s):
+            curr += i - prev[ch]
+            prev[ch] = i
             res += curr
-            prev = curr
-            last_seen[s[i]] = i
             
         return res
