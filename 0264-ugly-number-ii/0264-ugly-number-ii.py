@@ -1,17 +1,22 @@
-class Solution:
-    def nthUglyNumber(self, n: int) -> int:
+class Solution(object):
+    def nthUglyNumber(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        p2, p3, p5 = 0, 0, 0
         res = [1]
-        t2, t3, t5 = 0, 0, 0
         
-        while len(res) < n:
-            new = min(2 * res[t2], 3 * res[t3], 5 * res[t5])
-            if new not in res:
-                res.append(new)
-            if new == 2 * res[t2]:
-                t2 += 1
-            if new == 3 * res[t3]:
-                t3 += 1
-            if new == 5 * res[t5]:
-                t5 += 1
+        while len(res) != n:
+            tba = min(2 * res[p2], 3 * res[p3], 5 * res[p5])
+            if tba not in res:
+                res.append(tba)
+            if tba == 2 * res[p2]:
+                p2 += 1
+            elif tba == 3 * res[p3]:
+                p3 += 1
+            elif tba == 5 * res[p5]:
+                p5 += 1
                 
-        return res[n-1]
+        print(res)
+        return res[-1]
