@@ -4,6 +4,6 @@ class Solution:
         res = ""
         
         for i in n:
-            res += "1" if i == "0" else "0"
+            res += str(1^int(i))
             
         return int(res, 2)
