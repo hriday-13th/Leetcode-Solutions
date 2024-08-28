@@ -1,19 +1,19 @@
-class Solution:
-    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+class Solution(object):
+    def allPathsSourceTarget(self, graph):
+        """
+        :type graph: List[List[int]]
+        :rtype: List[List[int]]
+        """
         res = []
         end_node = len(graph) - 1
-        
-        adj = defaultdict(list)
-        for i in range(len(graph)):
-            adj[i].extend(graph[i])
         
         def backtrack(node, path):
             path.append(node)
             if node == end_node:
-                res.append(path.copy())
-            else: 
-                for child in adj[node]:
-                    backtrack(child, path)
+                res.append(path[:])
+            else:
+                for c in graph[node]:
+                    backtrack(c, path)
             path.pop()
             
         backtrack(0, [])
