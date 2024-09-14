@@ -1,15 +1,29 @@
-class Solution:
-    def maxSubArray(self, nums: List[int]) -> int:
-        high = -sys.maxsize-1
-        till = 0
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        local = 0
+        globe = nums[0]
         
-        for i in range(len(nums)):
-            till += nums[i]
+        for i in nums:
+            local += i
+            globe = max(globe, local)
             
-            if high < till:
-                high = till
-            
-            if till < 0:
-                till = 0
+            if local < 0:
+                local = 0
                 
-        return high
+        return globe
+#         s = 0
+#         maxi = nums[0]
+        
+#         for i in nums:
+#             s += i
+            
+#             maxi = max(maxi, s)
+            
+#             if s < 0:
+#                 s = 0
+                
+#         return maxi
