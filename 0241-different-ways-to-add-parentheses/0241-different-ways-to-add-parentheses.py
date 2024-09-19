@@ -1,25 +1,28 @@
-class Solution:
-    def diffWaysToCompute(self, expression: str) -> List[int]:
+class Solution(object):
+    def diffWaysToCompute(self, expr):
+        """
+        :type expression: str
+        :rtype: List[int]
+        """
         res = []
         
-        for i in range(len(expression)):
-            op = expression[i]
+        for i in range(len(expr)):
+            op = expr[i]
+            
             if op in "+-*":
-                s1 = expression[:i]
-                s2 = expression[i+1:]
-                str1 = self.diffWaysToCompute(s1)
-                str2 = self.diffWaysToCompute(s2)
+                s1 = self.diffWaysToCompute(expr[:i])
+                s2 = self.diffWaysToCompute(expr[i+1:])
                 
-                for i in str1:
-                    for j in str2:
+                for val1 in s1:
+                    for val2 in s2:
                         if op == "+":
-                            res.append(int(i) + int(j))
+                            res.append(int(val1) + int(val2))
                         if op == "-":
-                            res.append(int(i) - int(j))
+                            res.append(int(val1) - int(val2))
                         if op == "*":
-                            res.append(int(i) * int(j))
+                            res.append(int(val1) * int(val2))
                             
         if len(res) == 0:
-            res.append(int(expression))
+            res.append(int(expr))
             
         return res
