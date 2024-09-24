@@ -1,25 +1,26 @@
 class Trie:
-    def __init__(self, nums):
+    def __init__(self, string):
         self.d = {}
-        for ele in nums:
-            self.add_elem(ele)
-    
-    def add_elem(self, ele):
-        d = self.d
-        for char in str(ele):
-            if char not in d:
-                d[char] = {}
-            d = d[char]
+        for ch in string:
+            self.add_ele(ch)
             
-    def find_len(self, ele):
+    def add_ele(self, char):
         d = self.d
-        for i, c in enumerate(str(ele)):
+        for i in str(char):
+            if i not in d:
+                d[i] = {}
+            d = d[i]
+            
+    def find_len(self, char):
+        d = self.d
+        for i, c in enumerate(str(char)):
             if c not in d:
                 return i
             d = d[c]
         return i + 1
-        
-class Solution:
-    def longestCommonPrefix(self, arr1: List[int], arr2: List[int]) -> int:
+    
+class Solution(object):
+    def longestCommonPrefix(self, arr1, arr2):
         trie = Trie(set(arr1))
+        
         return max(trie.find_len(ele) for ele in set(arr2))
