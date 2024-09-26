@@ -1,21 +1,20 @@
 from sortedcontainers import SortedList
-class MyCalendarTwo:
+class MyCalendarTwo(object):
 
     def __init__(self):
         self.cal = SortedList()
 
-    def book(self, start: int, end: int) -> bool:
+    def book(self, start, end):
         self.cal.add((start, 1))
         self.cal.add((end, -1))
-        
         total = 0
+        
         for i, j in self.cal:
             total += j
             if total == 3:
                 self.cal.remove((start, 1))
                 self.cal.remove((end, -1))
                 return False
-            
         return True
 
 
