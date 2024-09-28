@@ -1,60 +1,55 @@
 class MyCircularDeque:
 
     def __init__(self, k: int):
-        self.len = k
-        self.deq = []
+        self.arr = []
+        self.len = 0
+        self.max_len = k
 
     def insertFront(self, value: int) -> bool:
-        if len(self.deq) < self.len:
-            self.deq.insert(0, value)
+        if self.len < self.max_len:
+            self.arr.insert(0, value)
+            self.len += 1
             return True
-        else:
-            return False
+        return False
 
     def insertLast(self, value: int) -> bool:
-        if len(self.deq) < self.len:
-            self.deq.append(value)
+        if self.len < self.max_len:
+            self.arr.append(value)
+            self.len += 1
             return True
-        else:
-            return False
+        return False
 
     def deleteFront(self) -> bool:
-        if len(self.deq) > 0:
-            self.deq = self.deq[1:]
+        if self.len > 0:
+            self.arr.pop(0)
+            self.len -= 1
             return True
-        else:
-            return False
+        return False
 
     def deleteLast(self) -> bool:
-        if len(self.deq) > 0:
-            self.deq = self.deq[:-1]
+        if self.len > 0:
+            self.arr.pop()
+            self.len -= 1
             return True
-        else:
-            return False
+        return False
+
 
     def getFront(self) -> int:
-        if len(self.deq) > 0:
-            return self.deq[0]
-        else:
-            return -1
+        if self.len > 0:
+            return self.arr[0]
+        return -1
+
 
     def getRear(self) -> int:
-        if len(self.deq) > 0:
-            return self.deq[-1]
-        else:
-            return -1
+        if self.len > 0:
+            return self.arr[-1]
+        return -1
 
     def isEmpty(self) -> bool:
-        if len(self.deq) == 0:
-            return True
-        else:
-            return False
+        return self.len == 0
 
     def isFull(self) -> bool:
-        if len(self.deq) == self.len:
-            return True
-        else:
-            return False
+        return self.len == self.max_len
 
 
 # Your MyCircularDeque object will be instantiated and called as such:
