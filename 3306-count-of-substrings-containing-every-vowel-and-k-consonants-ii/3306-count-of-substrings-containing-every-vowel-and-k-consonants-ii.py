@@ -1,13 +1,13 @@
-class Solution:
-    def countOfSubstrings(self, word: str, k: int) -> int:
+class Solution(object):
+    def countOfSubstrings(self, word, k):
         n = len(word)
         cons_count = 0
+        res = 0
         
         vowels = "aeiou"
         d = defaultdict(int)
         
         l_left, l_right = 0, 0
-        res = 0
         
         for r in range(n):
             if word[r] in vowels:
@@ -35,7 +35,7 @@ class Solution:
                 else:
                     break
                     
-            if cons_count == k and len(d) == 5:
-                res += (l_right - l_left + 1)
-        
+            if len(d) == 5 and cons_count == k:
+                res += l_right - l_left + 1
+                
         return res
