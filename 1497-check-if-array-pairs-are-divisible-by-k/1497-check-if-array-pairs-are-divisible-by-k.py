@@ -1,5 +1,5 @@
-class Solution:
-    def canArrange(self, arr: List[int], k: int) -> bool:
+class Solution(object):
+    def canArrange(self, arr, k):
         rem = [0] * k
         
         for i in arr:
