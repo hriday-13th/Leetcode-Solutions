@@ -1,5 +1,5 @@
-class Solution:
-    def camelMatch(self, queries: List[str], pattern: str) -> List[bool]:
+class Solution(object):
+    def camelMatch(self, queries, pattern):
         res = []
         
         for word in queries:
