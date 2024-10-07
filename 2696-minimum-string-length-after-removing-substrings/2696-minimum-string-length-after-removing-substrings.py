@@ -1,14 +1,13 @@
-class Solution:
-    def minLength(self, s: str) -> int:
-        st = []
+class Solution(object):
+    def minLength(self, s):
+        stack = []
         
-        for i in range(len(s)):
-            # print(st)
-            if not st:
-                st.append(s[i])
-            elif (s[i] == "B" and st[-1] == "A") or (s[i] == "D" and st[-1] == "C"):
-                st.pop(-1)
+        for i in s:
+            if not stack:
+                stack.append(i)
+            elif (i == "B" and stack[-1] == "A") or (i == "D" and stack[-1] == "C"):
+                stack.pop()
             else:
-                st.append(s[i])
+                stack.append(i)
                 
-        return len(''.join(st))
+        return len(stack)
