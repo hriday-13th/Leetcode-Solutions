@@ -1,13 +1,13 @@
-class Solution:
-    def minSwaps(self, s: str) -> int:
+class Solution(object):
+    def minSwaps(self, s):
         res = 0
-        x = 0
+        val = 0
         
         for i in s:
             if i == "[":
-                x += 1
-            else:
-                x -= 1
-            res = min(res, x)
+                val += 1
+            elif i == "]":
+                val -= 1
+            res = min(res, val)
             
-        return (- res + 1) // 2
+        return (-res + 1) // 2
