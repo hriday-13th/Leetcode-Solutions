@@ -1,5 +1,5 @@
-class Solution:
-    def countWays(self, nums: List[int]) -> int:
+class Solution(object):
+    def countWays(self, nums):
         nums.sort()
         count = 0
         
@@ -12,5 +12,5 @@ class Solution:
             s = i + 1
             if nums[i] < s and nums[i + 1] > s:
                 count += 1
-            
+                
         return count
