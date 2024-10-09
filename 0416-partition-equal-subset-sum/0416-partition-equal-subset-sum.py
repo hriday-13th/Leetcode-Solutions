@@ -1,5 +1,5 @@
-class Solution:
-    def canPartition(self, nums: List[int]) -> bool:
+class Solution(object):
+    def canPartition(self, nums):
         total = sum(nums)
         
         if total % 2 != 0:
@@ -12,6 +12,6 @@ class Solution:
         
         for num in nums:
             for j in range(target, num - 1, -1):
-                dp[j] = dp[j] or dp[j - num]
+                dp[j] = dp[j] or dp[j-num]
                 
         return dp[target]
