@@ -1,18 +1,18 @@
-class Solution:
-    def findSubsequences(self, nums: List[int]) -> List[List[int]]:
-        ans = []
-    
-        def dfs(start: int, path: List[int]) -> None:
+class Solution(object):
+    def findSubsequences(self, nums):
+        res = []
+        
+        def helper(ind, path):
             if len(path) > 1:
-                ans.append(path[:])
-
-            used = set()
-            for i in range(start, len(nums)):
-                if nums[i] in used:
+                res.append(path[:])
+            
+            seen = set()
+            for i in range(ind, len(nums)):
+                if nums[i] in seen:
                     continue
                 if not path or nums[i] >= path[-1]:
-                    used.add(nums[i])
-                    dfs(i + 1, path + [nums[i]])
-
-        dfs(0, [])
-        return ans
+                    seen.add(nums[i])
+                    helper(i + 1, path + [nums[i]])
+        
+        helper(0, [])
+        return res
