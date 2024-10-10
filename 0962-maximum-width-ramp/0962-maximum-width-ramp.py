@@ -1,5 +1,5 @@
-class Solution:
-    def maxWidthRamp(self, nums: List[int]) -> int:
+class Solution(object):
+    def maxWidthRamp(self, nums):
         st = []
         res = 0
         
