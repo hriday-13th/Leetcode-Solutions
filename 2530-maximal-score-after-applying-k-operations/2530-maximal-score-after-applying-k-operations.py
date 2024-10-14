@@ -1,14 +1,11 @@
-class Solution:
-    def maxKelements(self, nums: List[int], k: int) -> int:
-        max_heap = []
-        for i, ele in enumerate(nums):
-            heapq.heappush(max_heap, (-ele, i))
-            
+class Solution(object):
+    def maxKelements(self, nums, k):
+        max_heap = [-num for num in nums]
+        heapify(max_heap)
         res = 0
+        
         for i in range(k):
-            val, i = heapq.heappop(max_heap)
-            res += -val
-            new_val = math.ceil(-val / 3)
-            heapq.heappush(max_heap, (-new_val, i))
+            res -= max_heap[0]
+            heapreplace(max_heap, max_heap[0] // 3)
             
         return res
