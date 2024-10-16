@@ -1,15 +1,16 @@
-class Solution:
-    def longestDiverseString(self, a: int, b: int, c: int) -> str:
+class Solution(object):
+    def longestDiverseString(self, a, b, c):
         max_heap = []
-        
+    
         if a > 0:
             heapq.heappush(max_heap, (-a, "a"))
         if b > 0:
             heapq.heappush(max_heap, (-b, "b"))
         if c > 0:
             heapq.heappush(max_heap, (-c, "c"))
-        
+
         res = ""
+
         while max_heap:
             count1, char1 = heapq.heappop(max_heap)
 
@@ -28,5 +29,5 @@ class Solution:
             count1 += 1
             if count1 < 0:
                 heapq.heappush(max_heap, (count1, char1))
-    
+
         return res
