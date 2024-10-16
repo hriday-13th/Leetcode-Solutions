@@ -1,31 +1,23 @@
 class Solution:
     def minBitwiseArray(self, nums: List[int]) -> List[int]:
-        def helper(n):
-            if n & 0 == 1:
-                return -2
-            
-            count = 0
-            while n > 0 and n & 1 == 1:
-                count += 1
-                n >>= 1
-                
-            n <<= count
-            if count == 1:
-                return n
-            n += 1 << (count - 1)
-            return n - 1
-            
-        n = len(nums)
-        res = [-1] * n
+        ans = []
         
-        for i in range(n):
-            if nums[i] == 2:
-                continue
+        def helper(i):
+            count = 0
+            while i & 1 == 1:
+                count += 1
+                i >>= 1
+            count -= 1
+            num = ""
+            if i > 0:
+                num += str(bin(i)[2:])
+            num += "0" + "1" * count
+            return int(num, 2)
+        
+        for i in nums:
+            if i == 2:
+                ans.append(-1)
+            else:
+                ans.append(helper(i))
                 
-            val = helper(nums[i])
-            
-            if val == -2:
-                return False
-            res[i] = val
-
-        return res
+        return ans
