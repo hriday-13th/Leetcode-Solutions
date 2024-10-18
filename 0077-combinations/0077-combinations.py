@@ -1,5 +1,5 @@
-class Solution(object):
-    def combine(self, n, k):
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
         def backtrack(start, path, k):
             if k == 0:
                 res.append(path[:])
