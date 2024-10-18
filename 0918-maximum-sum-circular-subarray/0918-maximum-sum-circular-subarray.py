@@ -1,5 +1,5 @@
-class Solution:
-    def maxSubarraySumCircular(self, nums: List[int]) -> int:
+class Solution(object):
+    def maxSubarraySumCircular(self, nums):
         total = 0
         maxSum, currMax = nums[0], 0
         minSum, currMin = nums[0], 0
@@ -10,5 +10,5 @@ class Solution:
             maxSum = max(maxSum, currMax)
             currMin = min(currMin + i, i)
             minSum = min(minSum, currMin)
-            
+        
         return max(maxSum, total - minSum) if maxSum > 0 else maxSum
