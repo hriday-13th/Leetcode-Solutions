@@ -1,6 +1,6 @@
 class Trie:
-    def __init__(self, folder = ""):
-        self.val = folder
+    def __init__(self, val = ""):
+        self.val = val
         self.children = {}
         self.end = False
         
@@ -14,7 +14,7 @@ class Trie:
                 node.children[part] = Trie(part)
             node = node.children[part]
         node.end = True
-            
+        
     def dfs(self, node = None, path = "", paths = None):
         if paths is None:
             paths = []
@@ -32,12 +32,10 @@ class Trie:
             self.dfs(child, path, paths)
             
         return paths
-        
-class Solution:
-    def removeSubfolders(self, folder: List[str]) -> List[str]:
+
+class Solution(object):
+    def removeSubfolders(self, folder):
         trie = Trie()
-        
         for f in folder:
             trie.insert(f)
-            
         return trie.dfs()
