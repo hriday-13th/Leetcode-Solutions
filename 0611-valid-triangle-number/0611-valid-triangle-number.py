@@ -1,12 +1,15 @@
-class Solution:
-    def triangleNumber(self, nums: List[int]) -> int:
+class Solution(object):
+    def triangleNumber(self, nums):
         nums.sort()
-        ans = 0
-        for i in range(len(nums)): 
-            lo, hi = 0, i-1
-            while lo < hi: 
-                if nums[lo] + nums[hi] > nums[i]:
-                    ans += hi - lo 
-                    hi -= 1
-                else: lo += 1
-        return ans 
+        count = 0
+        
+        for i in range(len(nums)):
+            l, r = 0, i - 1
+            while l < r:
+                if nums[l] + nums[r] > nums[i]:
+                    count += r - l
+                    r -= 1
+                else:
+                    l += 1
+        
+        return count
