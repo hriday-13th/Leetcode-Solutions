@@ -1,19 +1,13 @@
 class Solution(object):
     def makeFancyString(self, s):
-        res = ""
-        prev1, prev2 = None, None
+        if len(s) < 3:
+            return s
         
-        for i in s:
-            if prev1 == None:
-                prev1 = i
-                res += i
-                continue
-            elif prev2 == None:
-                prev2 = prev1
-                prev1 = i
-                res += i
-                continue
-            elif i == prev1 and i == prev2:
+        res = s[:2]
+        prev1, prev2 = s[1], s[0]
+        
+        for i in s[2:]:
+            if i == prev1 and i == prev2:
                 continue
             else:
                 res += i
