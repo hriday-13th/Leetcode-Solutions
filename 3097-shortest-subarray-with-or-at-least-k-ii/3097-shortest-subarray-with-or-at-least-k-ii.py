@@ -1,13 +1,14 @@
-class Solution:
-    def minimumSubarrayLength(self, nums: List[int], k: int) -> int:
+class Solution(object):
+    def minimumSubarrayLength(self, nums, k):
         if k == 0:
             return 1
         
         bits = [0] * 32
         l = 0
         res = float('inf')
+        n = len(nums)
         
-        for r in range(len(nums)):
+        for r in range(n):
             curr = 0
             for i in range(32):
                 if nums[r] & (1 << i):
