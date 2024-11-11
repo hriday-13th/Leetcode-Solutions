@@ -1,25 +1,24 @@
+primes = [True] * 1001
+
+primes[0] = primes[1] = False
+prev_prime = 0
+
+for i in range(2, 1001):
+    if primes[i]:
+        prev_prime = i
+        for j in range(i*i, 1001, i):
+            primes[j] = False
+        
 class Solution(object):
     def primeSubOperation(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        prime = [True] * 1001
-        prime[0] = prime[1] = False
-        
-        for x in range(2, 1001):
-            if prime[x]:
-                for i in range(x*x, 1001, x):
-                    prime[i] = False
-                    
         prev = 0
         
-        for i in nums:
-            if prev >= i:
+        for num in nums:
+            if prev >= num:
                 return False
-            for j in range(i-1, -1, -1):
-                if prime[j] and i - j > prev:
+            for p in range(num - 1, -1, -1):
+                if primes[p] and num - p > prev:
                     break
-            prev = i - j
+            prev = num - p
             
         return True
