@@ -1,28 +1,24 @@
-class Solution:
-    def resultsArray(self, nums: List[int], k: int) -> List[int]:
-        if k == 1:
-            return nums
+class Solution(object):
+    def resultsArray(self, nums, k):
+        arr = []
+        prev = None
         
-        def check(ind):
-            c = nums[ind]
-            for i in range(ind, ind + k):
-                if nums[i] != c:
-                    return False
-                c += 1
-            return True
-        
-        res = []
-        is_prev = False
-        prev = -1
-        
-        for i in range(len(nums) - k + 1):
-            if is_prev:
-                if nums[i + k - 1] != nums[prev] + k:
-                    is_prev = False
+        for i in nums:
+            if prev is None:
+                prev = i
+                arr.append(1)
             else:
-                is_prev = check(i)
-            prev += 1
-            val = max(nums[i : i + k]) if is_prev else -1
-            res.append(val)
+                if i == prev + 1:
+                    arr.append(arr[-1] + 1)
+                else:
+                    arr.append(arr[-1] - 1)
+            prev = i
             
+        res = []
+        for i in range(len(nums) - k + 1):
+            if arr[i + k - 1] - arr[i] == k - 1:
+                res.append(nums[i+k-1])
+            else:
+                res.append(-1)
+                
         return res
