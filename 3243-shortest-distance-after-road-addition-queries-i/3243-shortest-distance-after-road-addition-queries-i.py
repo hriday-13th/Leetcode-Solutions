@@ -1,17 +1,16 @@
-class Solution:
-    def shortestDistanceAfterQueries(self, n: int, queries: List[List[int]]) -> List[int]:
-        adj = [[i+1] for i in range(n)]
+class Solution(object):
+    def shortestDistanceAfterQueries(self, n, queries):
+        adj = [[i + 1] for i in range(n)]
         
         def dfs():
-            q = deque()
-            q.append((0, 0))
+            q = deque([(0, 0)])
             visited = set((0, 0))
             
             while q:
-                curr, length = q.popleft()
-                if curr == n - 1:
+                node, length = q.popleft()
+                if node == n - 1:
                     return length
-                for nbr in adj[curr]:
+                for nbr in adj[node]:
                     if nbr not in visited:
                         q.append((nbr, length + 1))
                         visited.add(nbr)
