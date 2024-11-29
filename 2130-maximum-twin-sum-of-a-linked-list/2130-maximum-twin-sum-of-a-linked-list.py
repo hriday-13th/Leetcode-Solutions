@@ -10,8 +10,8 @@ class Solution:
         slow, fast = head, head
         res = 0
         
-        while slow is not None:
-            if fast is not None:
+        while slow:
+            if fast:
                 twins.append(slow.val)
                 fast = fast.next.next
             else:
