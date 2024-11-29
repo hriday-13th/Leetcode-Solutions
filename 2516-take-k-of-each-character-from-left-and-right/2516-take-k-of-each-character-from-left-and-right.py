@@ -1,16 +1,22 @@
 class Solution(object):
     def takeCharacters(self, s, k):
-        limits = {c: s.count(c) - k for c in 'abc'}
-        if any(x < 0 for x in limits.values()):
+        arr = [0, 0, 0]
+        
+        for c in s:
+            arr[ord(c) - ord('a')] += 1
+        
+        if min(arr) < k:
             return -1
-
-        cnts = {c: 0 for c in 'abc'}
-        ans = l = 0
-        for r, c in enumerate(s):
-            cnts[c] += 1
-            while cnts[c] > limits[c]:
-                cnts[s[l]] -= 1
+        
+        res = float('inf')
+        l = 0
+        for r in range(len(s)):
+            arr[ord(s[r]) - ord('a')] -= 1
+            
+            while min(arr) < k:
+                arr[ord(s[l]) - ord('a')] += 1
                 l += 1
-            ans = max(ans, r - l + 1)
-
-        return len(s) - ans
+                
+            res = min(res, len(s) - (r - l + 1))
+            
+        return res
