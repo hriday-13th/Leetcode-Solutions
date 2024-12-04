@@ -3,7 +3,7 @@ class Solution:
         i, j = 0, 0
         
         while i < len(str1) and j < len(str2):
-            if str1[i] == str2[j] or chr((ord(str1[i]) - ord('a') + 1 ) % 26 + ord('a')) == str2[j]:
+            if str1[i] == str2[j] or ord(str1[i]) + 1 == ord(str2[j]) or (str1[i] == 'z' and str2[j] == 'a'):
                 j += 1
             i += 1
             
