@@ -1,19 +1,19 @@
-class Solution:
-    def canChange(self, start: str, target: str) -> bool:
+class Solution(object):
+    def canChange(self, start, target):
         if start.replace("_", "") != target.replace("_", ""):
             return False
         
-        sl = [i for i in range(len(start)) if start[i] == "L"]
-        se = [i for i in range(len(start)) if start[i] == "R"]
-        tl = [i for i in range(len(target)) if target[i] == "L"]
-        te = [i for i in range(len(target)) if target[i] == "R"]
+        ls = [i for i in range(len(start)) if start[i] == "L"]
+        rs = [i for i in range(len(start)) if start[i] == "R"]
+        lt = [i for i in range(len(target)) if target[i] == "L"]
+        rt = [i for i in range(len(target)) if target[i] == "R"]
         
-        for a, b in zip(sl, tl):
-            if a < b:
+        for i, j in zip(ls, lt):
+            if i < j:
                 return False
             
-        for p, q in zip(se, te):
-            if p > q:
+        for i, j in zip(rs, rt):
+            if i > j:
                 return False
             
         return True
