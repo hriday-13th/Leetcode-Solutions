@@ -12,7 +12,7 @@ class Solution:
             
             d[nums[i]] = [i1, i2, i3]
             degree = max(degree, i3)
-        print(d)
+            
         res = float('inf')
         for i in d:
             if d[i][2] == degree:
