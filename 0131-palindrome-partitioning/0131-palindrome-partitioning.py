@@ -1,7 +1,7 @@
-class Solution:
-    def partition(self, s: str) -> List[List[str]]:
+class Solution(object):
+    def partition(self, s):
         res = []
-        path = []
+        paths = []
         
         def is_palindrome(s, i, j):
             while i < j:
@@ -13,13 +13,13 @@ class Solution:
         
         def backtrack(i):
             if i >= len(s):
-                res.append(path[:])
+                res.append(paths[:])
                 return
             for j in range(i, len(s)):
                 if is_palindrome(s, i, j):
-                    path.append(s[i:j+1])
+                    paths.append(s[i:j+1])
                     backtrack(j+1)
-                    path.pop()
+                    paths.pop()
                     
         backtrack(0)
         return res
