@@ -14,14 +14,14 @@ class Solution:
                 minQ.pop()
             minQ.append(right)
             
-            while nums[maxQ[0]] -nums[minQ[0]] > 2:
+            while nums[maxQ[0]] - nums[minQ[0]] > 2:
                 if maxQ[0] < minQ[0]:
                     left = maxQ[0] + 1
                     maxQ.popleft()
                 else:
                     left = minQ[0] + 1
                     minQ.popleft()
-                
+                    
             res += right - left + 1
             
         return res
