@@ -23,7 +23,6 @@ class Solution:
                 l.append(ele)
                 cal(ind + 1, l)
                 l.pop()
-                
         res = []
         cal(0, [])
         return res
